@@ -34,12 +34,9 @@ export default async function Home({ searchParams }: Props) {
         subtitle="Todos los productos"
         className="mb-2"
       />
-
       <ProductGrid 
         products={ products }
       />
-
-
       <Pagination totalPages={ totalPages } />
       
     </>

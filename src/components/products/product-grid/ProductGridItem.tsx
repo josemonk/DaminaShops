@@ -14,7 +14,7 @@ interface Props {
 
 export const ProductGridItem = ( { product }: Props ) => {
 
-  const [ displayImage, setDisplayImage ] = useState( product.images[ 0 ] );
+  const [ displayImage] = useState( product.images[ 0 ] );
 
 
   return (
@@ -26,8 +26,6 @@ export const ProductGridItem = ( { product }: Props ) => {
           className="w-full object-cover rounded"
           width={ 500 }
           height={ 500 }
-          onMouseEnter={ () => setDisplayImage( product.images[1] )  }
-          onMouseLeave={ () => setDisplayImage( product.images[0] ) }
         />
       </Link>
 
@@ -37,7 +35,6 @@ export const ProductGridItem = ( { product }: Props ) => {
           href={ `/product/${ product.slug }` }>
           { product.title }
         </Link>
-        <span className="font-bold">${ product.price }</span>
       </div>
 
     </div>
