@@ -1,9 +1,9 @@
-import { Inter, Montserrat_Alternates } from 'next/font/google';
+import { Roboto , Montserrat_Alternates } from 'next/font/google';
 
 
 
 
-export const inter = Inter({ subsets: ['latin'] });
+export const inter = Roboto({ subsets: ['latin'], weight:['500','700'] });
 
 
 export const titleFont = Montserrat_Alternates({ 
