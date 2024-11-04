@@ -9,8 +9,8 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Teslo | Shop',
-    default: 'Home - Teslo | Shop'
+    template: '%s - Damian | Shop',
+    default: 'Home - Damian | Shop'
   },
   description: 'Una tienda virtual de productos',
 }
