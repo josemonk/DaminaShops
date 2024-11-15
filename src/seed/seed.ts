@@ -22,6 +22,7 @@ interface SeedData {
 
 
 
+
 export const initialData: SeedData = {
 
   categories: [

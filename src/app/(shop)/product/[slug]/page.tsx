@@ -28,6 +28,7 @@ export async function generateMetadata(
 
   // fetch data
   const product = await getProductBySlug(slug);
+  
 
   // optionally access and extend (rather than replace) parent metadata
   // const previousImages = (await parent).openGraph?.images || []
