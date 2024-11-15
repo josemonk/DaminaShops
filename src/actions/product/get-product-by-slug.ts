@@ -7,7 +7,7 @@ export const getProductBySlug = async( slug: string ) => {
 
 
   try {
-
+      console.log("llego hasta el slu by id");
     const product = await prisma.product.findFirst({
       include: {
         ProductImage: {

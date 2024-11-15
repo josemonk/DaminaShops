@@ -1,8 +1,19 @@
-import { create } from 'zustand';
 import { initialData } from './seed';
 import prisma from '../lib/prisma';
 
+//genera string aleatorio para el slug
+function generateRandomString(length = 6) {
+  return Math.random().toString(36).substring(2, 2 + length);
+}
 
+// Función para dividir el array de productos en lotes de tamaño 'batchSize'
+function chunkArray<T>(array: T[], batchSize: number): T[][] {
+  const chunks = [];
+  for (let i = 0; i < array.length; i += batchSize) {
+    chunks.push(array.slice(i, i + batchSize));
+  }
+  return chunks;
+}
 
 async function main() {
 
@@ -36,35 +47,56 @@ async function main() {
   
   
 
+  
   // Productos
-
-  products.forEach( async(product) => {
-
-    const { type, images, ...rest } = product;
-
+const productsChunks = chunkArray(products, 100);
+for (const chunk of productsChunks){
+  const productPromises = chunk.map(async (product)=>{
+    const { type, images,slug, ...rest } = product;
+    const uniqueSlug = `${slug}_${generateRandomString()}`;
     const dbProduct = await prisma.product.create({
       data: {
         ...rest,
-        categoryId: categoriesMap[type]
+        categoryId: categoriesMap[type],
+        slug:uniqueSlug
       }
-    })
-
-
-    // Images
+    });
     const imagesData = images.map( image => ({
       url: image,
       productId: dbProduct.id
     }));
-
+  
     await prisma.productImage.createMany({
       data: imagesData
     });
+  })
 
-  });
+  await Promise.all(productPromises);
 
+  await new Promise((resolve)=> setTimeout(resolve,1000));
+} 
 
+  // products.forEach( async(product) => {
+  //   const { type, images,slug, ...rest } = product;
+  //   const uniqueSlug = `${slug}_${generateRandomString()}`;
+  //   const dbProduct = await prisma.product.create({
+  //     data: {
+  //       ...rest,
+  //       categoryId: categoriesMap[type],
+  //       slug:uniqueSlug
+  //     }
+  //   })
+  //   // Images
+  //   const imagesData = images.map( image => ({
+  //     url: image,
+  //     productId: dbProduct.id
+  //   }));
 
+  //   await prisma.productImage.createMany({
+  //     data: imagesData
+  //   });
 
+  // });
 
   console.log( 'Seed ejecutado correctamente' );
 }

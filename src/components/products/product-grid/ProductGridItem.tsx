@@ -14,14 +14,14 @@ interface Props {
 
 export const ProductGridItem = ( { product }: Props ) => {
 
-  const [ displayImage] = useState( product.images[ 0 ] );
+  const [ displayImage] = useState( product.images[ 0 ] ) || 'https://res.cloudinary.com/dsttqpwbm/image/upload/v1731619571/TennisDamian/yzwgutf3uzgkmvgulhzv.jpg';
 
 
   return (
     <div className="rounded-md overflow-hidden fade-in">
-      <Link href={ `/product/${ product.slug }` }>
+      <Link href={ `${ product.slug }` }>
         <Image
-          src={ `/products/${ displayImage }` }
+          src={ displayImage }
           alt={ product.title }
           className="w-full object-cover rounded"
           width={ 500 }
