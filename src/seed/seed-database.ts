@@ -45,7 +45,7 @@ async function main() {
     return map;
   }, {} as Record<string, string>); //<string=shirt, string=categoryID>
   
-  
+    
 
   
   // Productos
