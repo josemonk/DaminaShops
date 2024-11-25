@@ -40,7 +40,7 @@ export async function generateMetadata(
       title: product?.title ?? "Producto no encontrado",
       description: product?.description ?? "",
       // images: [], // https://misitioweb.com/products/image.png
-      images: [ `/products/${ product?.images[1] }`],
+      images: [ `/products/${ product?.images[0] }`],
     },
   };
 }
@@ -48,7 +48,6 @@ export async function generateMetadata(
 export default async function ProductBySlugPage({ params }: Props) {
   const { slug } = params;
   const product = await getProductBySlug(slug);
-  console.log(product);
 
   if (!product) {
     notFound();
@@ -64,7 +63,6 @@ export default async function ProductBySlugPage({ params }: Props) {
           images={product.images}
           className="block md:hidden"
         />
-
         {/* Desktop Slideshow */}
         <ProductSlideshow
           title={product.title}

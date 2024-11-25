@@ -3,7 +3,7 @@
 import Image from 'next/image';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, FreeMode, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, FreeMode, Pagination } from 'swiper/modules';
 
 
 import 'swiper/css';
@@ -52,13 +52,9 @@ export const ProductMobileSlideshow = ( { images, title, className }: Props ) =>
                 className="object-fill"
               />
             </SwiperSlide>
-
           ) )
         }
       </Swiper>
-
-
-
     </div>
   );
 };
