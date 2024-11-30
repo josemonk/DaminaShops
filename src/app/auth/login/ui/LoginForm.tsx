@@ -7,6 +7,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { IoInformationOutline } from "react-icons/io5";
 import clsx from 'clsx';
 import { authenticate } from '@/actions';
+import { useRouter } from 'next/navigation';
 // import { useRouter } from 'next/navigation';
 
 export const LoginForm = () => {
@@ -15,29 +16,27 @@ export const LoginForm = () => {
   // const router = useRouter();
   const [state, dispatch] = useFormState(authenticate, undefined);
   
-  // console.log(state);
+  useEffect(() => {
+    if ( state === 'Success' ) {
+     // redireccionar
+      // router.replace('/');
+      window.location.replace('/');
+    }
 
-  // useEffect(() => {
-  //   if ( state === 'Success' ) {
-  //     redireccionar
-  //     router.replace('/');
-  //     window.location.replace('/');
-  //   }
+  },[state]);
 
-  // },[state]);
 
-  console.log({state});
 
   return (
     <form action={ dispatch }  className="flex flex-col">
-      <label htmlFor="email">Correo electrónico</label>
+      <label className='text-white' htmlFor="email">Correo electrónico</label>
       <input
         className="px-5 py-2 border bg-gray-200 rounded mb-5"
         type="email"
         name="email"
       />
 
-      <label htmlFor="email">Contraseña</label>
+      <label className='text-white' htmlFor="email">Contraseña</label>
       <input
         className="px-5 py-2 border bg-gray-200 rounded mb-5"
         type="password"
@@ -60,7 +59,7 @@ export const LoginForm = () => {
       </div>
 
         {/* <LoginButton /> */}
-        <LoginButton></LoginButton>
+        <LoginButton/>
       {/* <button type="submit" className="btn-primary">
         Ingresar
       </button> */}

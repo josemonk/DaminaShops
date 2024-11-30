@@ -34,6 +34,9 @@ export const getPaginatedProductsWithImages = async ({
       where: {
         gender: gender,
       },
+      orderBy: {
+        creationDate:'desc'
+      }
     });
 
     // 2. Obtener el total de páginas

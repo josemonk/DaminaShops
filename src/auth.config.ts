@@ -10,6 +10,20 @@ export const authConfig:NextAuthConfig = {
     signIn: '/auth/login',
     newUser: '/auth/new-account'
   },
+  callbacks:{
+
+    jwt({ token, user }) {
+      if ( user ) {
+        token.data = user;
+      }
+      return token;
+    },
+    
+    session({ session, token, user }) {
+      session.user = token.data as any;
+      return session;
+    },
+  },
   providers:[
     Credentials({
       async authorize(credentials) {
@@ -20,20 +34,17 @@ export const authConfig:NextAuthConfig = {
         if (!parsedCredentials.success) return null;
         
         const { email, password } = parsedCredentials.data;
-
-        const user = await prisma.user.findUnique({where: {email: email.toLocaleLowerCase()}})
-        console.log(user);
+        const user = await prisma.user.findUnique({where: {email: email.toLocaleLowerCase()}});
         if (!user) return null;
 
         if( !bcryptjs.compareSync(password, user.password) ) return null;
 
-        console.log(user);
-
-        const {password:_, ...rest} = user
-        return user;
+        //regresar el usuario sin el pasword
+        const {password:_, ...rest} = user;
+        return rest;
       },
     }),
   ]
 } 
 
-export  const { signIn,signOut } = NextAuth(authConfig);
+export  const { signIn,signOut, auth, handlers } = NextAuth(authConfig);

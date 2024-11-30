@@ -65,6 +65,7 @@ export default function OrdersByIdPage( { params }: Props ) {
 
                 <div key={ product.slug } className="flex mb-5">
                   <Image
+                  unoptimized
                     src={ `/products/${ product.images[ 0 ] }` }
                     width={ 100 }
                     height={ 100 }
