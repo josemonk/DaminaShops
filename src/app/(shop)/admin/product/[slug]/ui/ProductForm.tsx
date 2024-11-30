@@ -221,11 +221,11 @@ export const ProductForm = ({ product, categories }: Props) => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {product.images?.map((image) => (
-              <div>
+            {product.ProductImages?.map((image) => (
+              <div key={image.id}>
                 <ProductImage
                   alt={product.title ?? ""}
-                  src={ image}
+                  src={ image.url}
                   width={300}
                   height={300}
                   className="rounded-t shadow-md"
